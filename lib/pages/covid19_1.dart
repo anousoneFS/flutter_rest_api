@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rest_api/pages/components/my_final_card.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 
 class FinalCovid extends StatefulWidget {
   @override
@@ -29,41 +30,55 @@ class _FinalCovidState extends State<FinalCovid> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("coivid19"),
+        backgroundColor: Colors.red,
+        elevation: 0,
       ),
-      body: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: 100,
-            color: Colors.red,
-          ),
-          myData == null
-              ? Expanded(
-                child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-              )
-              : Expanded(
-                  child: ListView.builder(
-                    // reverse: true,
-                    // shrinkWrap: false,
-                    itemCount: myData.length,
-                    itemBuilder: (context, index) {
-                      String date = myData[index]['date'].toString();
-                      String confirmed = myData[index]['confirmed'].toString();
-                      String deaths = myData[index]['deaths'].toString();
-                      String recovered = myData[index]['recovered'].toString();
-                      return myCard(
-                        date: date,
-                        confirmed: confirmed,
-                        deaths: deaths,
-                        recovered: recovered,
-                      );
-                    },
-                  ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 50,
+              color: Colors.red,
+              child: Center(
+                child: Text(
+                  "ຕິດຕາມຜູ້ຕິດເຊື່ອ covid19 ໃນລາວ",
+                  style: TextStyle(fontSize: 30, fontFamily: "NotoSansLao")
                 ),
-        ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            myData == null
+                ? Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      // reverse: true,
+                      // shrinkWrap: false,
+                      itemCount: myData.length,
+                      itemBuilder: (context, index) {
+                        String date = myData[index]['date'].toString();
+                        String confirmed =
+                            myData[index]['confirmed'].toString();
+                        String deaths = myData[index]['deaths'].toString();
+                        String recovered =
+                            myData[index]['recovered'].toString();
+                        return myCard(
+                          date: date,
+                          confirmed: confirmed,
+                          deaths: deaths,
+                          recovered: recovered,
+                        );
+                      },
+                    ),
+                  ),
+          ],
+        ),
       ),
     );
   }

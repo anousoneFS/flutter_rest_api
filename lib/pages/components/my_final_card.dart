@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Card myCard({String date, String confirmed, String deaths, String recovered}) {
   return Card(
@@ -74,7 +75,7 @@ Expanded mySubCard(String name, String value) {
               color: Colors.blue,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Center(child: Text(name)),
+            child: Center(child: Text(name),),
           ),
           Container(
             width: double.infinity,
