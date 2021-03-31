@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rest_api/models/lek_laos_info.dart';
 import 'package:rest_api/pages/covid19.dart';
+import 'package:rest_api/pages/covid19_1.dart';
 import 'package:rest_api/pages/home_data.dart';
 import 'package:rest_api/pages/home_data1.dart';
 import 'package:rest_api/pages/home_page.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: CovidPage(),
+        home: FinalCovid(),
       ),
     );
   }

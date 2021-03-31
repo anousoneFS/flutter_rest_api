@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class CovidPage extends StatefulWidget {
   @override
@@ -28,9 +28,8 @@ class _CovidPageState extends State<CovidPage> {
     }
     setState(() {
       print("hi");
-      // print(myMap);
+      print(myMap);
     });
-    // print(myData);
   }
 
   void initState() {
@@ -42,18 +41,50 @@ class _CovidPageState extends State<CovidPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("covid 19 Tracker"),
+          title: Text("Laos Covid19 Tracker"),
         ),
         body: ListView.builder(itemCount: myMap.length, itemBuilder: (context, index) {
           String name = myMap[index]["confirmed"].toString();
-          String date = myMap[index]["date"].toString();
-          return myCard(name, date);
+          String deaths = myMap[index]["deaths"].toString();
+          String recovered = myMap[index]["recovered"].toString();
+          var date = myMap[index]["date"].toString().split('-');
+          String newDate = date[2] + '/' +  date[1] + '/' + date[0];
+          return myNewCard(name, deaths, recovered, newDate);
         })
     );
   }
 }
 
+Card myNewCard(String confirmed, String deaths, String recovered, String date ){
+  return Card(
+    elevation: 5,
+    child: Container(
+      child: Column(
+        children: [
+         Row(
+           mainAxisAlignment: MainAxisAlignment.spaceAround,
+           children: [
+             Text("date"),
+            Text("confirmed"),
+            Text("deaths"),
+            Text("recovered"),
+           ],
+         ) ,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(date),
+              Text(confirmed),
+              Text(deaths),
+              Text(recovered),
+            ],
+          )
 
+        ],
+      ),
+    ),
+  );
+}
 Container myCard(String confirmed, String date) {
   return Container(
     height: 100,
@@ -63,10 +94,10 @@ Container myCard(String confirmed, String date) {
       child: ListTile(
           leading: CircleAvatar(
             radius: 30,
-            child: FittedBox(child: Text(confirmed)),
+            child: FittedBox(child: Text(confirmed, style: TextStyle(fontSize: 20),)),
           ),
-          title: Text("laos", style: TextStyle(fontSize: 20),),
-          subtitle: Text(date),
+          title: Text("laos", style: TextStyle(fontSize: 24),),
+          subtitle: Text(date, style: TextStyle(fontSize: 20, ),),
     ),
   ),);
 }
